@@ -1,0 +1,602 @@
+@import url(http://fonts.googleapis.com/css?family=Quicksand:400);
+
+/*
+Blue = rgb(40,40,80);
+Gray = rgb(220,220,220);
+Dark gray = rgb(100,100,100);
+Gold = rgb(255,200,0);
+Yellow = rgb(255,217,77);
+*/
+
+body, html {
+	margin: 0 auto;
+	background: rgb(220,220,220);
+/* 	overflow-x: hidden; */
+	padding-bottom: 20px;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a, h1, h2, h3, h4, p, span, table {font-family: "Quicksand", helvetica neue;}
+
+
+strong {
+	font-weight: 600;
+	color: rgb(200,200,200);
+}
+
+textarea, input[type="text"] {
+	font-size: 1.2em;
+	display: block;
+	margin: 0;
+}
+
+input {
+	padding: 5px;
+	border-radius: 0;
+	outline: none;
+	border: 2px solid rgb(0,0,0);
+}
+
+textarea:focus, input:focus {outline:none;box-shadow: inset 0 0 15px -5px rgb(0,0,0);}
+
+.xbox {
+	position: absolute;
+	display: inline;
+	top: 5px;
+	right: 5px;
+	background: rgb(220,220,220);
+	color: rgb(0,0,0);
+	z-index: 10;
+	padding: 2px;
+}
+
+
+/**************Sidbar Nav**************/
+
+#sidebar {
+	width: 12em;
+	background: rgb(40,40,80);
+	color: rgb(255,255,255);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 200;
+	height: 100%;
+	box-shadow: 4px 0 0 0 rgb(255,200,0);
+	-webkit-transition: left .6s ease-out;
+}
+
+#sidebar h2 {
+	font-size: 1.4em;
+	margin: 0 0 10px 0;
+	text-align: center;
+	color: rgb(40,40,80);
+	background: rgb(255,255,255);
+	border-bottom: 4px solid rgb(255,200,0);
+}
+
+#sidebar > img {
+	width: 100%;
+	background: rgb(255,255,255);
+}
+
+#sidebar > h3 {
+	font-size: 1.2em;
+	margin: 0 0 5px 0;
+	padding-right: 5px;
+	text-align: right;
+	border-bottom: 2px solid rgb(100,100,100);
+	position: relative;
+	cursor: alias;
+}
+
+#sidebar h3 a {position:relative;}
+
+#showStart {
+	position:fixed;
+	z-index: 1000;
+	bottom: 5px;
+	right: 2em;
+	width: 4em;
+	display: block;
+	opacity: 0;
+	cursor: hand;
+	-webkit-transition: opacity .5s ease-out;
+	-moz-transition: opacity .5s ease-out;
+}
+
+.navSection {}
+
+
+#omConfigs, #userTables {
+	margin: 5px auto;
+	width: 95%;
+	position: relative;
+	padding-bottom: 5px;
+}
+
+#omConfigs {background:rgb(220,220,220);}
+#userTables {background: rgb(100,100,100);}
+
+#omConfigs h2{
+	padding: 5px;
+	color: rgb(0,0,0);
+	background: rgb(255,255,255);
+	margin-bottom: 10px;
+}
+
+
+#omConfigs a, #userTables a {
+	padding: 2px;
+	display: block;
+	color: rgb(0,0,0);
+	background: rgb(255,200,0);
+	margin: 5px auto;
+	width: 90%;
+	font-size: 1em;
+	word-break: break-all;
+}
+
+#omConfigs a:hover, #userTables a:hover {
+	background:rgb(255,217,77);
+}
+
+#tableSelected {
+	width: 105%;
+	background: rgb(255,200,0);
+	color: rgb(40,40,80);
+	border-bottom: 4px solid rgb(255,255,255);
+}
+
+#new_nav_div {
+	padding: 5px;
+	position: relative;
+	width: 90%;
+	margin: 0 auto;
+}
+
+#new_nav_div a {
+	width: 40%;
+	margin-bottom:5px;
+	display: inline-block;
+	position: relative;
+	text-align: center;
+	background: rgb(255,255,255);
+	color: rgb(40,40,80);
+	padding: 2px;
+	border-right: 6px solid rgb(255,200,0);
+	-webkit-transition: all .5s ease-out;
+}
+
+#new_nav_div a:hover {
+	background: rgb(255,200,0);
+}
+
+.squareselect {
+	border-radius: 0;
+	background: rgb(255,255,255);
+	border: 3px solid rgb(0,0,0);
+}
+
+/**************HOME PANEL**************/
+
+.adminContent {
+	padding: 0 0 0 12em;
+	margin: 0;
+	-webkit-transition: all .6s ease-out;
+	-moz-transition: all .6s ease-out;
+}
+
+.adminContent h1 {
+	margin-top: 0;
+	margin-bottom: 10px;
+	font-size: 2.5em;
+	position: relative;
+	left: 10px;
+	width: 90%;
+	border-bottom: 4px solid rgb(40,40,80);
+}
+
+.homePanel {
+	position: relative;
+	width: 92%;
+	margin: 0 auto;
+	background: rgb(255,255,255);
+	padding: 0 0 20px 0;
+}
+
+.homePanel > h3 {
+	font-size: 1.6em;
+	text-align: center;
+	padding: 5px 0;
+	background: rgb(40,40,80);
+	color: rgb(255,255,255);
+	border-bottom: 4px solid rgb(255,200,0);
+}
+
+.homePanel > a {
+	background: rgb(220,220,220);
+	position:relative;
+	display: inline-block;
+	margin-bottom: 5px;
+	left: 5px;
+}
+
+.homePanel > a img {
+	z-index: 0;
+	position: relative;
+}
+
+.homePanel > a:hover {
+	background: rgb(255,200,0);
+}
+
+.homeModule {
+	
+}
+
+.actionNav {
+	float: right;
+	background: rgb(255,200,0);
+	border: 4px solid rgb(40,40,80);
+	border-right:none;border-top:none;
+	z-index: 50;
+	position: relative;	
+}
+
+.actionNav a {display:inline-block;}
+.actionNav a:hover {background: rgb(255,255,255);}
+
+.actionNav a img {
+	width: 2.8em;
+}
+
+.newContentWrap {
+	margin: 10px auto;
+	top: 10px;
+	position: relative;
+	width: 96%;
+	background: rgb(255,200,0);
+	border: 4px solid rgb(40,40,80);
+	padding: 5px;
+	overflow: hidden;
+/* 	-webkit-transition: all .6s ease-out; */
+	box-shadow: 0 0 15px -5px rgb(0,0,0);
+}
+
+.newContentWrap > a {
+	float: right;
+	width: 3em;
+	display: block;
+	-webkit-transition: all .6s ease-out;
+}
+
+.newContentWrap a img {
+	width: 100%;
+	background: rgb(100,100,100);	
+}
+
+
+.newContentWrap h2 {
+	font-size:2em;
+	padding: 5px;
+	border-bottom: 2px solid rgb(0,0,0);
+	margin: 5px auto 10px auto;
+}
+
+.newContentWrap div > h3 {
+	background: rgb(220,220,220);
+	font-size: 1.6em;
+	padding: 2px;
+	margin: 10px 0;
+}
+
+.newContentWrap form {
+	width: 95%;
+	margin: 0 auto;
+	display: block;
+	background: rgb(220,220,220);
+	padding: 5px 0 10px 10px;
+}
+
+.newContentWrap form h3 {
+	font-size: 1.4em;
+	margin: 5px 0;
+	text-align: center;
+	color: rgb(255,255,255);
+	background: rgb(40,40,40);
+}
+
+.newContentWrap form h4 {
+	margin: 0;
+	font-size: 1.2em;
+}
+
+.newContentWrap input {
+	width: 95%;
+	background:
+	rgb(255,255,255);
+}
+
+.newContentWrap button {
+	display: block;
+	font-size: 1.2em;
+	text-align: center;
+	margin: 5px 0 0 0;
+	background: rgb(40,40,80);
+	color: rgb(255,255,255);
+	border: none;
+	position: relative;
+	width: 100%;
+}
+
+.newContentWrap form input {margin-bottom: 5px;}
+
+.tableCreate {
+	margin: 10px 0;
+	position: relative;
+}
+
+.tableCreate div {
+	padding: 5px;
+	margin: 0 auto;
+	width: 96%;
+	margin-bottom: 10px;
+	background: rgb(70,70,140);
+	position:relative;
+}
+
+.tableCreate a {
+	float:right;
+	background: rgb(255,0,0);
+	color:rgb(255,255,255);
+	padding:2px;	
+}
+
+.tableCreate span {background: rgb(255,217,77);padding: 2px;}
+
+.tableCreate input {
+	font-size: 1em;
+	padding: 2px;
+	display: inline-block;
+	width: 7em;
+}
+
+#addDataField {
+	border-radius: 5px;
+	font-size: 1.4em;
+	padding: 2px 0;
+	width: 95%;
+	margin: 0 auto;
+	text-align: center;
+	cursor: hand;
+	display: block;
+	background: rgb(0,0,0);
+	color: rgb(255,255,255);
+}
+
+
+
+
+/**************Table Style**************/
+
+#tableContent {
+}
+
+#tableContent h2{
+	padding: 5px 0 5px 5px;
+	margin: 0 0 5px 0;
+	background: rgb(0,0,0);
+	color: rgb(255,255,255);
+	font-size: 30px;
+}
+
+#tableContent h2 img {
+	width: 1.2em;
+	position: relative;
+	float: right;
+	display: inline;
+	top: -5px;
+	background: rgb(255,200,0);
+	padding: 2px;
+	margin-left: 5px;
+	border-bottom: 2px solid rgb(255,255,255);
+}
+
+#tableContent h2 img:hover {
+	background: rgb(255,255,255);
+}
+
+.OmTable {
+	position: relative;
+	border-collapse: separate;
+	border-spacing: 1px;
+	border-color: rgb(0,0,0);
+	margin: 0 auto 10px auto;
+	/* right: 0; */
+	width: 98%;
+}
+
+.OmTable tr:nth-of-type(2n+1) {background:rgb(255,255,255);}
+.OmTable tr {background: rgb(200,200,255);}
+
+
+.OmTable th {
+	background: rgb(80,80,80);
+	color: rgb(255,255,255);
+	padding: 2px;
+	font-size: 16px;
+}
+
+.OmTable td {
+	/*  */
+	padding: 2px;
+	word-break: break-word;
+	font-size: 13px;
+	position: relative;
+	cursor: hand;
+	
+}
+
+.OmTable td a {
+	font-size: 14px;
+	/* background: rgb(255,200,0); */
+	border:1px solid rgb(0,0,0);
+	padding: 2px;
+	/* position: absolute;	 */
+	top: 0;
+	float:left;
+	left: 0;
+}
+
+.quickEdit {
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	position: absolute;
+	display: block;
+	top: 0;
+	left: 0;
+}
+
+.OmTableForm {
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+}
+
+.OmTableForm table, .OmTableForm input {
+	width: 100%;
+}
+
+.OmTableForm table td {
+	width: 50%;
+}
+
+.OmTableForm table tr td:first-of-type {
+	background: rgb(180,180,180);
+}
+
+.OmTableForm button {
+	width: 100%;
+	padding: 5px 0;
+	background: rgb(200,200,255);
+	font-size: 1.5em;
+	border: none;
+	border-radius: 0;
+	color: rgb(0,0,0);
+}
+
+/**************Import Nav**************/
+
+#importPanel {
+	position: fixed;
+	top: 10%;
+	left:30%;
+	z-index: -5;
+	opacity: 0;
+	-webkit-transform: rotateY(90deg);
+	width: 60%;
+	padding: 5px 5px 20px 5px;
+	border: 6px solid rgb(40,40,80);
+	background: rgb(255,200,0);
+	box-shadow: 0 0 20px 0 rgb(0,0,0);
+	-webkit-transition: all .4s ease-out;
+}
+
+#importPanel h2{
+	text-align: center;
+	font-size: 2em;
+	margin-top:0;
+	padding: 5px 0;
+	border-bottom: 2px solid rgb(0,0,0);
+}
+
+#importPanel input {margin-bottom: 5px;}
+
+#importPanel form {
+	width: 95%;
+	padding: 5px;
+	position: relative;
+	margin: 0 auto;
+	background: rgb(255,255,255);
+	border: 1px solid rgb(0,0,0);
+}
+
+#importPanel form h3 {
+	margin: 0 0 10px 0;
+	padding: 5px;
+	border-bottom: 2px solid rgb(0,0,0);
+	width: 90%;
+}
+
+#importPanel form textarea {
+	position: relative;
+	width: 90%;
+	margin: 0 auto;
+	margin: 10px;
+}
+
+#importPanel button {
+	display:block;
+	background: rgb(0,0,0);
+	font-size: 1.5em;
+	border-radius: 0;
+	border: none;
+	color: rgb(255,255,255);
+	width: 100%;
+	text-align: center;
+}
+
+#importExit {
+	float:right;
+	padding: 5px;	
+	background: rgb(220,220,220);
+	box-shadow: 2px 2px 0 0;
+}
+
+/**************Success Alerts**************/
+
+#successBox, #failBox {
+	position: fixed;
+	z-index: -5;
+	margin: 0 auto;
+	background: rgba(255,255,255,.5);
+	background: -webkit-linear-gradient(45deg, 
+		rgb(100,100,100) 0%, rgb(255,200,0) 30%, 
+		rgba(0,0,0,0) 30%, rgba(0,0,0,0) 100%
+	);
+	background-size: 5px;
+	padding: 5px 5px 0 5px;
+	border: 4px solid rgb(0,0,0);
+	opacity: 0;
+	display: inline-block;
+	max-width: 20em;
+	right: 0;
+	top: 50px;
+	-webkit-transition: all .7s linear;
+}
+
+#successBox span {position: relative; top: -5px;background: rgb(150,150,255);padding:5px;z-index: 100;}
+
+#failBox span {
+	text-align: center;
+	background: rgb(255,0,0);
+	padding: 5px;
+	
+}
+
+#successBox div, #failBox p {
+	position:relative;
+	margin-top: 5px;
+	width: 100%;
+	padding: 5px 0;
+	text-align: center;
+}
+
+#successBox div {background: rgb(150,150,255);}
+#failBox p {background: rgb(255,0,0);}

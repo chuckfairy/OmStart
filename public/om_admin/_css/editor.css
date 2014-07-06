@@ -1,0 +1,394 @@
+html, body{margin: 0;padding: 1.9em 0 0 0;}
+
+body {
+	height: 50em;
+}
+
+a, h1, h2, h3, h4, p, span, table {font-family: "Quicksand", helvetica neue;font-weight: 400;}
+
+pre, span {font-family: monospace!important;}
+
+
+/****************************MENU****************************/
+
+#fileEditorMenu{
+	position: absolute;
+	margin: 0;
+	top:0;
+	width: 100%;
+	height: 3em;
+	padding: 5px 0;
+	background: rgb(40,40,40);
+	border-bottom:4px solid rgb(40,40,80);
+	z-index: 10;
+}
+
+#fileEditorMenu > a {
+	width: 2.5em;
+	display: inline-block;
+	background: rgb(255,200,0);
+	margin-right: 10px;
+	padding: 2px;
+	float:right;
+}
+
+#fileEditorMenu a:hover {
+	background: rgb(255,255,255);
+}
+
+#fileEditorMenu > a img {
+	width: 100%;
+}
+
+#fileTabs {
+	top: 15px;
+	left: 20px;
+	position: absolute;
+	background: rgb(220,220,220);
+	width: 12em;
+}
+
+#fileTabs span {
+	display: block;
+	position: relative;
+	padding:0 2em 0 0;
+}
+
+#fileTabs span h3 {
+	font-size: 1.2em;
+	padding: 2px;
+	margin: 0;
+}
+
+#fileTabs span a{
+	position: absolute;
+	right: -5px;
+	top: 2px;
+	font-size: .8em;
+	text-align: center;
+	width: 2em;
+	display: block;
+	border: 2px solid rgb(255,200,0);
+	background: rgb(255,255,255);
+}
+
+#fileTabs div {
+	background: rgb(40,40,40);
+	color: rgb(255,255,255);
+	margin: 5px auto 10px auto;
+	padding:5px 0;
+	display: block;
+	position: relative;
+	width: 95%;
+}
+
+#fileTabs div a {
+	display: block;
+	background: rgb(255,200,0);
+	color: rgb(0,0,0);
+	position: relative;
+	margin: 10px 0;
+}
+
+#addNewFile {
+	text-align: center;
+	background: rgb(40,40,80);
+	font-size: 1em;
+	position: absolute;
+	padding: 0;
+	bottom: 0;
+	display: block;
+	cursor: alias;
+}
+
+/****************************Writer****************************/
+
+#writerWrap {
+	background: rgb(100,100,100);
+	width: 50%;
+	height: 100%;
+	position: relative;
+	padding:0;
+	margin:0;
+}
+
+
+#editor {
+	height: 100%;
+	position: relative;
+	top:0;
+	margin:0;
+}
+
+#col-resize {
+	float:right;
+	height: 100%;
+	left: 0px;
+	position: relative;
+	cursor: col-resize;
+	background: rgb(40,40,80);
+	width: 8px;
+}
+
+/****************************Render****************************/
+
+#renderWrap {
+	background: rgb(100,100,100);
+	height: 100%;
+	width: 50%;
+	float:right;
+	display: inline-block;
+}
+
+#renderWrap div {
+	margin: 0;
+	z-index: 2;
+	position: relative;
+}
+
+#renderWrap div a{
+	float: right;
+	font-size: 1.2em;
+	background: rgb(220,220,220);
+	margin: 5px 10px 0 10px;
+	padding: 2px 5px;	
+}
+
+#renderWrap span {
+	display: block;
+	border: none;
+	box-shadow: 0 0 15px -5px rgb(0,0,0);
+	width: 95%;
+	top: 0;
+	position: relative;
+	height: 95%;
+	margin: 0 auto;
+	background: rgb(255,255,255);
+	padding: 5px;
+	border-radius: 5px;
+}
+
+/****************************File Browser****************************/
+
+.OmBox {
+	width: 95%;
+	padding: 0;
+	margin: 0 auto;
+	display: block;
+	display: none;
+	background:rgb(100,100,100);
+	z-index: 20;
+	position: fixed;
+	top: 2em;
+	left: 0;
+	right: 0;
+	min-height: 50%;
+	max-height: 90%;
+	-webkit-transition: all .5s ease-in;
+	overflow: hidden;
+}
+
+.OmBoxTop {
+	background: rgb(40,40,80);
+	background: -webkit-linear-gradient(40deg,
+		rgb(20,20,40) 0%, rgb(20,20,40) 40%,
+		rgb(40,40,80) 40%, rgb(40,40,80) 100%
+	);
+	background-size: cover;
+	position: absolute;
+	z-index: 10;
+	margin-bottom: 20px;
+	left:0;
+	right:0;
+	top: 0;
+	display: block;
+	color: rgb(255,255,255);
+}
+
+
+.OmBoxTop h3 {
+	font-size: 1.5em;
+	padding: 5px;
+	margin: 0;
+}
+
+.OmBoxMinimize, .OmBoxX, .OmBoxFullsize {
+	font-size: .8em;
+	top: .4em;
+	position: relative;
+	float:right;
+	clear:none;
+	margin-right: 10px;
+	padding: 5px;
+	border: 2px solid rgb(0,0,0);
+	color: rgb(255,255,255);
+}
+
+.OmBoxMinimize:hover, .OmBoxX:hover, .OmBoxFullsize:hover{
+	background:rgb(0,0,0);
+	color: rgb(255,255,255);
+}
+
+.OmBoxX {
+	background: rgb(200,0,0);
+	background: -webkit-linear-gradient(45deg, 
+		rgb(180,0,0) 0%,
+		rgb(255,20,20) 100%
+	);
+}
+
+
+.OmBoxMinimize {
+	background: rgb(255,200,0);
+	background: -webkit-linear-gradient(45deg, 
+		rgb(200,100,0) 0%,
+		rgb(255,217,77) 100%
+	);
+}
+
+.OmBoxFullsize {
+	background: rgb(0,200,0);
+	background: -webkit-linear-gradient(45deg, 
+		rgb(0,180,0) 0%,
+		rgb(50,255,50) 100%
+	);
+}
+
+.OmBoxContent {
+	padding-top: 4em;
+	height: 100%; 
+	overflow-y: scroll;
+}
+
+.OmBoxFilpOn {
+	-webkit-transform: rotateX(0deg);
+	opacity: 1;
+	box-shadow: 0 10px 20px -5px rgb(0,0,0);
+}
+
+.OmBoxFlipOff {
+	-webkit-transform: rotateX(90deg);
+	opacity: 0;
+	box-shadow: none;
+}
+
+
+
+#fileBrowser {}
+
+#fileActions {
+	width: 19.9em;
+	display: inline-block;
+	float: left;
+	position: relative;
+	z-index: 5;
+	margin: 0 .5em;
+	padding: .7em;
+	background: rgb(40,40,40);
+	color: rgb(255,255,255);
+	border-radius: 5px;
+	box-shadow: inset 0 0 15px -5px rgb(0,0,0);
+}
+
+#fileActions input {
+	margin: 10px 0;
+}
+
+#serverFileSearch {
+	display: block;
+	position: relative;
+	background: rgb(40,40,40);
+	height: 3.5em;
+}
+
+#serverFileSearch input {
+	border:none;
+	background: rgb(220,220,220);
+}
+
+#serverFileSearch a {
+	position: absolute;
+	right: 0;
+	background: rgb(100,100,255);
+	color: rgb(255,255,255);
+	height: 1.7em;
+	text-align: center;
+	width: 3em;
+	z-index: 0;
+	font-size: 1.2em;
+}
+
+#fileActions > h2 {
+	font-size: 1.4em;
+	text-align: center;
+	padding-bottom: 5px;
+	margin: 0 0 10px 0;
+	border-bottom: 2px solid rgb(255,200,0);
+}
+
+#fileActions div {
+	width: 100%;
+	margin: 0 auto;
+	background: rgb(220,220,220);
+}
+
+#fileActions div h3 {
+	background: rgb(255,255,255);
+	color: rgb(0,0,0);
+	border-bottom: 2px solid rgb(255,200,0);
+	padding: 5px 0;
+	text-align: center;
+	margin: 0 0 5px 0;
+}
+
+#fileActions div input {
+	width: 90%;
+	display: block;
+	margin: 0 auto;
+	color: rgb(0,0,0);
+}
+
+#fileActions div a {
+	margin: 5px 0 0 ;
+	display: block;
+	text-align: center;
+	padding: 5px 0;
+	font-size: .8em;
+	color: rgb(255,217,77);
+	border: none;
+	background: rgb(40,40,80);
+	width: 100%;
+}
+
+#fileActions div a:hover {
+	background: rgb(255,217,77);
+	color: rgb(100,100,100);
+}
+
+#browserFiles {
+	display: block;
+	padding: 0 0  0 22em;
+	position: relative;
+	clear:none;
+}
+
+#browserFiles table {
+	
+
+}
+
+#browserFiles h3 {
+	background: rgb(40,40,40);
+	width: 97%;
+	font-size: 1em;
+	padding: 0 5px;	
+	margin: 0 auto;
+	position: relative;
+	color: rgb(255,255,255);	
+}
+
+
+.file-link {background: rgb(255,200,0);}
+.file-dir {background: rgb(100,100,255);}
+
+

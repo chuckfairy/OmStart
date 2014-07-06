@@ -1,0 +1,8 @@
+&lt;style&gt;#someTag {display: css;}&lt;/style&gt;&lt;script&gt;
+//Sample Comment
+&lt;/script&gt;
+&lt;h2&gt;The Header is god&lt;/h2&gt;
+&lt;div id=&quot;contentDiv&quot;&gt;
+  &lt;p&gt;The Main action&lt;/p&gt;
+
+
