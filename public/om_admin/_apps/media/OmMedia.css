@@ -1,0 +1,131 @@
+/****************************Media Editor****************************/
+#mediaEditWrap {
+	background: rgb(40,40,40);
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.editorTopActions {
+	display: block;
+	background: rgb(255,255,255);
+	padding: 5px;
+} 
+
+#OmMediaTitle {
+	text-align: center;
+	border: none;
+	font-size: 2.6em;
+	color: rgb(255,255,255);
+}
+
+#OmMediaSplash {
+	margin: 0 auto;
+	width: 95%;
+	background: rgb(210,200,170);	
+	min-height: 4em;
+}
+
+#mediaSplashKeys {
+	display: block;
+	border-bottom: 1px solid rgb(120,120,120);
+}
+
+#mediaSplashKeys a {
+	padding: 5px;
+	display: inline-block;
+	color: rgb(50,50,255);
+}
+
+#mediaSplashKeys a:hover {color: rgb(150,150,255);}
+
+#mediaSplashKeys .selected {
+	background: rgb(80,80,80);
+	color: rgb(255,255,255);
+}
+
+#OmMediaSplashPages {
+	width: 85%;
+	margin: 10px auto 0 auto;
+	display: block;
+	padding-bottom: 10px;
+}
+
+#OmMediaGallery, #editMedia {
+	width: 95%;
+	margin: 5px auto;
+	position: relative;
+	background: rgb(255,255,255);
+	border: 2px solid rgb(50,50,255);
+	padding: 5px 0 15px 0;
+}
+
+
+#newMediaToggle {
+	font-size: 1.4em;
+	text-align: center;
+	display: block;
+	
+}
+
+#newMedia {
+	width: 90%;
+	padding: 5px;
+	background: rgb(230,230,230);
+	border: 1px solid rgb(0,0,0);
+	margin: 10px auto;
+	display: block;
+}
+
+#newMedia h3 {
+	margin: 5px 0;
+}
+
+#newMedia input[type=text] {
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+
+#newMedia button{
+	display: block;
+	font-size: 1em;
+	border: 1px solid rgb(0,0,0);
+}
+
+.mediaBackHome {
+	position: absolute;
+	top: 0;
+	right:0;
+	background: rgb(50,50,255);
+	padding: 3px;
+	color: rgb(255,255,255) !important;
+}
+
+#editMediaForm h2 {
+	text-align: left;
+	width: 90%;
+	border-bottom: 2px solid rgb(180,180,180);
+	margin: 10px 0 15px 5px;
+}
+
+#editMediaForm img {
+	max-width: 80%;
+	margin: 5px 0;
+}
+
+#editMediaForm button {
+	font-size: 1.2em;
+	border: 2px solid rgb(180,180,180);
+	clear: both;
+	display: block;
+}
+
+#deleteMediaButton {
+	float: right;
+	padding: 5px;
+	display: inline-block;
+	background: rgb(255,50,50);
+	color: rgb(255,255,255);
+	font-size: 1.2em;
+	margin: 10px 0;
+}
+

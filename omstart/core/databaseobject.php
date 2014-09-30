@@ -5,6 +5,7 @@ class DatabaseObject {
 	private $connection; //Set outside class
 	private static $last_query; //Set in various methods
 	public static $tables=array(); 
+	public static $table_data = array();
 	public static $link; //Set in the construct
 	protected static $PDO;
 	private $server, $user, $password, $db_name;
@@ -12,30 +13,9 @@ class DatabaseObject {
 /*************************************************************GENERAL  METHODS******************************************************/
 	
 	function __construct() {
-/*
-		$this->connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-		if(!$this->connection) {
-			die("Database connection failed: " . mysql_error());
-		} else {
-			self::$PDO = new PDO("mysql:host=".DB_SERVER.";dbname=".DB_NAME, DB_USER, DB_PASS);
-			self::$link = $this->connection;
-			$this->data(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-			$this->get_tables();
-			mysqli_set_charset(self::$link, "utf8");
-			return true;		
-		}
-*/
+
 	}
-	
-	public function get_tables() {
-		self::$tables = array();
-		$query_table = "SHOW TABLES;";
-		$query_data = self::query($query_table);
-		$table_index = "Tables_in_".DB_NAME;
-		foreach($query_data as $table){array_push(self::$tables, $table[$table_index]);}
-		return self::$tables;
-	}
-	
+		
 	public function connect($server=null, $db_name=null, $user=null, $pass=null ) {
 		$this->server = $server;
 		$this->db_name = $db_name;
@@ -51,6 +31,7 @@ class DatabaseObject {
 			exit;	
 		}
 		$this->get_tables();
+		$this->extract_tables();
 		return true;
 	}
 	
@@ -72,13 +53,7 @@ class DatabaseObject {
 		//$safe_string = mysql_real_escape_string($safe_string);
 		return $safe_string;
 	}
-	
-	private static function check_query_data($result) {
-		if(self::assoc($result)) {return false;}
-	}
-	
-	//public static function assoc($assoc) {return mysqli_fetch_assoc($assoc);}
-	
+		
 	private function insert_id() {return mysqli_insert_id(self::$link);}
   
     private static function affected_rows() {return mysqli_affected_rows(self::$link);}
@@ -86,15 +61,23 @@ class DatabaseObject {
 	
 /*************************************************************DATABASE METHODS******************************************************/
 	//Main query function using PDO	
-	public static function query($sql, $execute=null) {  //String must be sanitzed		
-		self::$last_query = self::$PDO->prepare($sql);
-		self::$last_query->execute($execute);
-		$result = self::$last_query->fetchAll(PDO::FETCH_ASSOC);
+	public static function query($sql, $execute=null) {  //String must be sanitzed
+		//try {		
+			self::$last_query = self::$PDO->prepare($sql);
+			self::$last_query->execute($execute);
+			$result = self::$last_query->fetchAll(PDO::FETCH_ASSOC);
+			//echo $sql."<br/>";
+		//} catch(PDOException $e) {
+		//	print_r($e);
+		//}
 		return $result;
 	}
+/****************************Read Methods****************************/
 	//FIND methods
-	public static function find_all() {
-		$query = "SELECT * FROM ".static::$table_name." ";
+	public static function find_all($all=true) {
+		if($all) {$select = " * ";}
+		else {$select = static::$select;}
+		$query = "SELECT ".$select." FROM ".static::$table_name.static::$join." ";
 		return static::specify($query);
 	}
 	
@@ -104,14 +87,32 @@ class DatabaseObject {
 		return self::query($query, [":id"=>$id]);
 	}
 	
-	public static function find_by($field, $subject, $limit=1) {
+	public static function find_by($field, $subject, $debug=false) {
 		global $database;
-		$query = "SELECT * FROM ".static::$table_name;
-		$query.= " WHERE {$field} = :{$field} LIMIT {$limit}";
-		$result = self::query($query, [":{$field}" => $subject]);
-		return $result;
+		$query = "SELECT ".static::$select." FROM ".static::$table_name.static::$join;
+		static::filter_out($field, $subject);
+		return static::specify($query);
 	}
 	
+	public static function select($select_array) {
+		static::$select = implode(" , ",$select_array);
+	}
+	
+	public static function join($jointable, $tablefield, $joinfield) {
+		if(static::validate_table($jointable) && self::is_field($tablefield)) {
+			static::$join = ", {$jointable} ";
+			static::$join_by = " ".static::$table_name.
+				".{$tablefield}={$jointable}.{$joinfield} ";
+		}
+	}
+
+	public static function join_clear() {
+		static::$join = null;
+		static::$join_by = null;
+	}
+	
+	
+/****************************CUD Methods****************************/
 	
 	//CUD Actions
 	protected static function create($attributes) {
@@ -124,6 +125,8 @@ class DatabaseObject {
 		foreach($attributes as $field => $value) {
 			$execute[":{$field}"] = $value;
 		}
+		echo $sql;
+		print_r($execute);
 		return $results = self::query($sql, $execute);
 	}
 	
@@ -132,23 +135,23 @@ class DatabaseObject {
 		$attribute_pairs = array();
 		if(!isset($attributes["id"])) {return false;}
 		$id = $attributes["id"];unset($attributes["id"]);
+		
+		$execute = array();
 		foreach($attributes as $key => $value) {
-			$attribute_pairs[] = "{$key}='{$value}'";
+			$attribute_pairs[] = "{$key}= :{$key}";
+			$execute[":{$key}"] = $value;
 		}
 		$sql  = "UPDATE ".static::$table_name." SET ";
 		$sql .= join(", ", $attribute_pairs);
 		$sql .= " WHERE id=".$id;
-		$database->query($sql);
-		$affected_rows = self::affected_rows();
-		return true;
+		return $result = self::query($sql, $execute);
 	}
 	
 	protected static function delete($id) {
 		$sql  = "DELETE FROM ".static::$table_name;
 		$sql .= " WHERE id= :id";
 		$sql .= " LIMIT 1";
-		self::query($sq, $id);
-		return (self::affected_rows() == 1) ? true : false;
+		return self::query($sql, [":id"=>$id]);
 	}
 	
 	public function last_query() {
@@ -157,51 +160,87 @@ class DatabaseObject {
 	
 /*************************************************************VALIDATIONS  METHODS******************************************************/
 	
-	public static function validate_length($subject, $field) {
-		global $session;
-		$description = self::query("DESCRIBE ".static::$table_name);
-		foreach($description as $data) {
-		//Find the desired field.
-			if($data["Field"] == $field) { 
-				//Check what to data type to validate
-				$data_type = $data["Type"];
-				
-				//*VARCHAR*
-				if(preg_match("/varchar/i", $data_type)) {
-					$type_length = preg_replace("/[^0-9,.]/", "", $data_type);
-					$length_number = intval($type_length);
-					if($length_number >= strlen($subject)) {
-						// The string is good to go.
-						return true;
-					} else {
-						// The string is too long.
-						return false;
-					}
-					
-				} else {
-					//Not Varchar
-					return true;
-				}				
-				
-				//*INT*, *TINYINT*, 
-				// NOT FUNCTIONING
-				if(preg_match("/int/i", $data_type)) {
-					return true;					
-				}						
-			}
+	private function get_tables() {
+		self::$tables = array();
+		$query_table = "SHOW TABLES;";
+		$query_data = self::query($query_table);
+		$table_index = "Tables_in_".DB_NAME;
+		foreach($query_data as $table){array_push(self::$tables, $table[$table_index]);}
+		return self::$tables;
+	}
+	
+	//Loops through each table and extracts table data in 
+	//table_data by their table name.
+	private function extract_tables() {
+		foreach(self::$tables as $table) {
+			self::$table_data[$table] = $this->table_data($table);
+		}
+		//var_dump(self::$table_data);
+		
+	}
+	
+	//Get description and load data in new array
+	private function table_data($table) {
+		
+		$fields = self::query("DESCRIBE ".$table);
+		$table_data = [];
+		
+		foreach($fields as $d) {		
+			 
+			if($d["Key"] === "PRI") {$key="primary";}
+			else {$key = "";} 
+			$type = $this->get_field_type($d["Type"]);
+			
+			$field_data = [
+				"null"    => $d["Null"],
+				"key"     => $key,
+				"type"    => $type["type"],
+				"max"     => (int) $type["length"],
+				"default" => $d["Default"],
+				"extra"   => $d["Extra"],
+			
+			];
+			
+			$table_data[$d["Field"]] = $field_data;
+		}
+		return $table_data;
+	}
+	
+	private function get_field_type($type_data) {
+		$return_data = [];
+		//VARCHAR
+		if(preg_match("/varchar/i", trim($type_data))) {
+			$return_data["length"] = preg_replace("/[^0-9,.]/", "", $type_data);
+			$return_data["type"]   = "VARCHAR";
+			return $return_data;
+		}
+		//INT
+		elseif(preg_match("/int/i", $type_data)) {
+			$return_data["length"] = preg_replace("/[^0-9,.]/", "", $type_data);
+			$return_data["type"]   = "INT";
+			return $return_data;					
+		} 
+		//TEXT
+		elseif(preg_match("/text/i", trim($type_data))) {
+			$return_data["length"] = 2500;
+			$return_data["type"]   = "text";
+			return $return_data;		
+		}	
+	}
+	
+	
+	public static function validate_length($subject=null, $field) {
+		if(static::is_field($field)) {
+			
 		}
 	}
 	
 	public static function get_fields() {
-		$descriptions = self::query("DESCRIBE ".static::$table_name);
-		$fields = array();
-		foreach($descriptions as $description) {
-			array_push($fields, $description["Field"]);
-		}
-		return $fields;
+		$table_data = self::$table_data[static::$table_name];
+		return array_keys($table_data);
 	}
 		
-	public function validate_table($table_name) {
+	public static function validate_table($table_name) {
 		foreach(self::$tables as $table) {
 			if($table == $table_name) {
 				return true;
@@ -210,52 +249,99 @@ class DatabaseObject {
 		return false;
 	}		
 	
-	protected static function is_field($field) {
-		global $database;
-		$descriptions = $database->query("DESCRIBE ".static::$table_name);		
-		foreach($descriptions as $description) {
-			if($description["Field"] == $field) {return true;}
+	public static function is_field($field) {
+		$table_fields = static::get_fields();
+		foreach($table_fields as $table_field) {
+			if($table_field === $field) {return true;}
 		}
-		return false;	
+		return false;
 	}
 	
 /*************************************************************QUERY SPECIFIERS******************************************************/	
 	
-	public static function filter_out($attribute, $value=null) {
+	public static function filter_out($attribute, $value=null, $OR=false) {
 		//Check  if filter is set.
-		if(isset(static::$filter[$attribute])) {
-			return false;
-		}
-		
 		if($value == null) {
-			$push = $attribute." != '' ";
-			array_push(static::$filter, $push);
+			if ($OR){$delim = " IS NULL ";}
+			else {$delim = " != '' ";}
+			$push = $attribute.$delim;
+			static::$filter["NULL"] = $push;
 			return true;
 		} else {
-			if(static::is_field($attribute)) {
-				static::$filter[$attribute] = $value;
+			if($attribute) {
+				$delim="";
+				if($OR == true) {
+					$delim = "||";
+				}
+				static::$filter["{$delim}{$attribute}"] = $value;
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	public static function set_order($field, $ASC=true) {
+		if(static::is_field($field)) {
+			if($ASC) {
+				static::$order = $field." ASC ";
+			} else {
+				static::$order = $field." DESC ";
+			}
+		}
+	}
+	
 	protected static function specify($query, $use_offset=true) {
 		$addition = null;
 		$i=0;
-		if(!empty(static::$filter)) {
-			foreach(static::$filter as $filterkey => $value) {
-				if($i > 0) {
-					$addition.= " AND {$filter}= :{$filter} ";
-				} else {
-					$addition.= "WHERE {$filterkey} = :{$filterkey} ";
-					$i++;
+		$execute = array();
+		
+		if(!empty(static::$filter)) {		
+			foreach(static::$filter as $filterkey => $filtervalue) {
+				//Delim set to AND by default changed by || before keyvalue
+				$delim = " AND ";
+				
+				if($filterkey == "NULL") {
+					$addition.= $delim.$filtervalue;
+					$i++;continue;
 				}
+				
+				//Get OR statements
+				if(preg_match("/\|/", $filterkey)) {
+					$delim = " || ";
+					$filterkey = str_replace("||", "", $filterkey);
+				}
+				
+				$addition.= ($i != 0)? $delim : " WHERE ";
+				
+				if(is_array($filtervalue)) {
+					$t = 0;
+					foreach($filtervalue as $value ) {
+						if($t > 0 ) {
+							$addition.= " || :{$filterkey}{$t}";	
+						} else {						
+							$addition.= " {$filterkey} = :{$filterkey}{$t} ";
+						}
+						$execute[":{$filterkey}{$t}"] = $value;
+						$t++;
+					}
+					$i++;
+					continue;
+				}
+				
+				$addition.= " ".static::$table_name.".{$filterkey} = :{$filterkey} ";
+				$execute[":{$filterkey}"] = $filtervalue;
+				$i++;
 			}
 		}
 		
+		
+		if(!empty(static::$join_by)) {
+			if(!empty(static::$filter)) {$addition.= " AND ".static::$join_by;}
+			else {$addition.= " WHERE ".static::$join_by;}	
+		}	
+		
 		if(!empty(static::$order)) {
-			$addition.= " ORDER BY ".static::$order." ASC ";
+			$addition.= " ORDER BY ".static::$order;
 		}
 		if(!empty(static::$limit)) {
 			$addition.= " LIMIT ".static::$limit;
@@ -263,7 +349,7 @@ class DatabaseObject {
 		if(!empty(static::$offset) && $use_offset == true) {
 			$addition.= " OFFSET ".static::$offset;
 		}
-		return self::query($query.$addition, static::$filter);;
+		return self::query($query.$addition, $execute);;
 	}
 	
 	public function clear_filters() {
@@ -271,7 +357,6 @@ class DatabaseObject {
 		foreach($filter_vars as $var) {
 			if(isset($this->$var)) {unset($this->$var);}
 		}
-		
 		static::$filter = array();
 	}
 	

@@ -9,18 +9,20 @@ class Session {
 	private $user_id;
 	private $admin;
 	public $username;
-	public $errors;
 	public $last_page;
 	//public static $message = [];
 	public $messages = array();
+	private $errors  = array();
 	public $time;
 	
 	function __construct() {
+		
 		session_start();
 		$this->check_messages();
 		$this->check_page();
 		$this->time = date("M-d-Y/g:i:s");
 		$this->messages = array();
+		$this->check_messages();
 		$this->check_login();
 	}
 	
@@ -37,33 +39,28 @@ class Session {
 		//We are going to append the messages array and join them into a string
 		//So we can use it as one string that we can then split. 
 		array_push($this->messages, $message);
-		$new_messages = join("|", $this->messages);
-		$_SESSION["messages"] = $new_messages;
+		array_push($_SESSION["messages"], $message);
 	}
 	
 	private function check_messages() {
 		if(!empty($_SESSION["messages"])) {
-			preg_match("/|/i", $_SESSION["messages"]) ? 
-				$this->messages = preg_split("/|/i", $_SESSION["messages"]): 
-				$this->messages = $_SESSION["messages"];
-				
-			unset($_SESSION["messages"]);
+			$this->messages = $_SESSION["messages"];
 			return true;
 		} else {
-			return false;
+			$_SESSION["messages"] = array();
 		}
 	}
 	
 	
 /*************************************************************SESSION INFO**************************************************/
 	
-	public function login($user, $type="user") {
+	public function login($user) {
 		// $user is an assoc array with id, username.
 		if(isset($user["id"], $user["username"])) {
 			$_SESSION["user_id"] =	$user["id"];
 			$_SESSION["username"] = $user["username"];
 			if($this->check_login()) {
-				$this->set_message("{$_SESSION['username']} is now logged in!");
+				$this->set_message("{$user['username']} is now logged in!");
 				return true;
 			} else {
 				$this->set_message("Failed logging in.");
@@ -85,14 +82,13 @@ class Session {
 		}
 	}
 	
-	public function log_out($page_redirect=SITE_HOME) {
-		if($this->check_login()) {
-			unset($_SESSION["user_id"]);
-			unset($_SESSION["username"]);
-			if(valid_page($page_redirect)) {
-				redirect_to($page_redirect);
-			}
-		}
+	public function is_logged_in() {
+		return $this->logged_in;
+	}
+	
+	public function log_out() {
+		unset($_SESSION["user_id"]);
+		unset($_SESSION["username"]);
 	}
 	
 	public function set_last_page() {
@@ -114,7 +110,7 @@ class Session {
 
 	public function set_error($message) {
 		$message = strval($message);
-		array_pusher($this->errors, $message);
+		array_push($this->errors, $message);
 		$this->set_message($message);
 		$_SESSION["errors"] = $this->errors;
 	}

@@ -1,0 +1,147 @@
+/****************************Database Editor****************************/
+#databaseEditorWrap {
+	background: rgb(230,230,230);
+	padding-left:0;
+	padding-right:0;
+}
+
+#databaseHome, #databaseTableContent {
+	margin: 0 auto;
+	width: 95%;
+}
+
+#databaseHome > span, #databaseTableContent > span {
+	background: rgb(222,222,255);
+	display: block;
+	padding: 5px;
+	margin: 10px 0;
+	box-shadow: 0 0 23px -5px rgb(0,0,0);
+}
+
+#databaseHome > span:last-of-type {margin: 0;}
+
+#databaseTables > a {
+	margin: 5px 0;
+	background: rgb(80,80,80);
+	color: rgb(230,230,230);
+	border: 2px solid rgb(180,180,180);
+	padding: 5px;
+	display: inline-block;
+}
+
+#databaseTableLinks > a {
+	display: block;
+	font-size: 1.2em;
+	color: rgb(50,50,255);
+	background: rgb(255,255,255);
+	padding: 2px;
+}
+
+#databaseTableLinks > a:nth-of-type(2n) {background: rgb(230,230,230);}
+
+#tableCreatorWrap {
+	padding: 5px;
+	background: rgb(180,180,180);
+	border: 2px solid rgb(0,0,0);
+}
+
+#tableCreatorWrap > input {font-size: 1.2em;}
+
+#tableCreate {
+	background: rgb(200,200,255);
+	margin: 5px 0;
+	position: relative;
+}
+
+#tableCreate div {
+	padding: 3px;
+	border-bottom: 1px solid rgb(80,80,80);
+}
+
+#tableCreate div:nth-of-type(2n) {
+	background: rgb(255,255,255);
+}
+
+.removeTable {
+	font-size: 12px;
+	text-align: center;
+	padding: 3px;
+	background: rgb(255,50,50);
+	color: rgb(255,255,255) !important;
+}
+
+#addDataField {
+	display: block;
+	padding: 2px 0;
+	font-size: 1.2em;
+	background: rgb(230,230,230);
+	margin: 5px 0;
+	text-align: center;
+	border: 2px solid rgb(50,50,255);
+	border-radius: 5px;
+}
+
+#tableCreatorWrap button {
+	font-size: 1.4em;
+}
+
+#databaseTableContent > h2 {position: relative;}
+
+#databaseTableContent > h2 a {
+	position: absolute;
+	top:5px;
+	right: 5px;
+	font-size: 14px;
+}
+
+#tableActionKeys > a{
+	padding: 2px 4px;
+	font-size: 1em;
+	float: left;
+}
+
+#tableActionKeys > a:hover, #tableActionKeys .selected{
+	background: rgb(80,80,80);
+	color: rgb(255,255,255);
+}
+
+#tableActions {
+	padding: 5px;
+	margin: 0 0 10px 0;
+	background: rgb(80,80,80);
+	color: rgb(255,255,255);
+	clear:both;
+	display: block;
+	border-bottom: 4px solid rgb(40,40,40);
+}
+
+#databaseInsertForm > h3 {
+	font-size: 1.2em;
+	padding: 3px 0;
+}
+
+#databaseInsertForm > h3 span {
+	color: rgb(255,50,50);
+	font-size: 12px;
+}
+
+#tableInsertSubmit {
+	width: 100%;
+	padding: 3px 0;
+	display: block;
+	background: rgb(50,50,255);
+	color: rgb(230,230,230);
+	font-size: 1.2em;
+}
+
+.recordDeleteSubmit {
+	color: rgb(255,255,255) !important;
+	width: 100%;
+	padding-top: 10px;
+	display: block;
+	font-size: 1.2em;
+	height: 2em;
+	background: rgb(50,50,255);
+	padding: 0;
+	text-align: center;
+}

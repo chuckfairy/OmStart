@@ -1,0 +1,121 @@
+#settingsWrap {
+	-webkit-transition: all 1s ease-out;
+	-moz-transition: all 1s ease-out;
+	-ms-transition: all 1s ease-out;
+	-webkit-perspective-origin: center;
+	height: 100%;
+	width: 100%;
+	display: block;
+	position: absolute;
+	z-index: 999;
+}
+
+.settingsWrapOn {
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+}
+.settingsWrapOff {
+	-webkit-transform: scale(.5); 
+	-moz-transform: scale(.5);
+	-ms-transform: scale(.5);
+
+}
+
+#settingsScreen {
+	display: block;
+	position: absolute;
+	z-index: 1000;
+	top: 0;
+	width: 100%;
+	min-width: 40em;
+	overflow-x: auto;
+	height: 100%;
+	background: rgb(230,230,230);
+}
+
+#settingsScreen > a {
+	position: fixed;
+	top: 5px;
+	right: 15px;
+	font-size: 2em;
+	height: 1.2em;
+	width: 1.4em;
+	padding: .2em 0 0 0;
+	line-height: 25pt;
+	text-align: center;
+	border-radius: 50%;
+	background: rgb(50,50,255);
+	color: rgb(255,255,255);
+	text-decoration: none;
+	border: 2px solid rgb(0,0,0);
+}
+
+#settingsNavigation {
+	display: block;
+	width: 10em;
+	position: absolute;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background: rgb(180,180,180);
+	box-shadow: inset -2px 0 0 0 rgb(0,0,0);
+}
+
+#settingsNavigation > a {
+	font-size: 1.4em;
+	display: block;
+	padding: 5px;
+	text-decoration: none;
+	margin: 10px 0;
+	text-align: center;
+}
+
+#settingsNavigation > img {
+	width: 85%;
+	margin: 0 auto;
+	display: block;
+}
+
+#settingsPagesWrap {
+	display: block;
+	padding-left: 10em;
+	height: 100%;
+}
+
+#settingsPagesWrap > div {
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: auto;
+}
+
+#settingsPagesWrap h2{
+	font-size: 3em;
+	margin: 0 0 10px 0;
+	text-align: center;
+}
+
+#settingsPagesWrap > div > div {
+	padding: 5px;
+}
+
+#userSettings h3 {
+	font-size: 2em;
+	border-bottom: 1px solid rgb(180,180,180);
+	padding: 2px 0;
+}
+
+#userSettings h4 {
+	font-size: 1.4em;
+}
+
+#userSettings input {
+	font-size: 1em;
+}
+
+#userSettings button {
+	background: rgb(50,50,255);
+	border: 2px solid rgb(0,0,0);
+	font-size: 1.2em;
+	color: rgb(255,255,255);
+}

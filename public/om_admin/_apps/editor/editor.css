@@ -1,0 +1,153 @@
+/****************************File Editor****************************/
+#fileEditor {
+	background: rgb(200,200,230);
+	position: relative;
+	overflow-x: auto;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#editorNavWrap {
+	display: block;
+	height: 100%;
+	width: 11em;
+	position: absolute;
+	z-index: 10;
+	top: 3.3em;
+	left:5px;
+}
+
+#editorNav {
+	width: 11em;
+	overflow-x:auto;
+	box-shadow: 0 0 10px -5px rgb(0,0,0);
+	margin: 0 auto 20px 0;
+	color: rgb(0,0,0);
+	padding: 0;
+	background: rgb(255,255,255);
+	border: 1px solid rgb(0,0,0);
+	height: 100%;
+}
+
+#fileEditorDirs img{
+	width: 2em;
+	float: left;
+}
+
+.browserDir  {
+	display: block;
+	border-bottom: 1px solid rgb(180,180,180);
+	clear: both;
+	width: 100%;
+	padding: 5px 0;
+	
+}
+
+.browserFile {
+	display: block;
+	padding: 5px 0;
+	min-height: 2em;
+	border-bottom: 1px solid rgb(0,0,0);
+	width: 100%;
+	clear: both;
+}
+
+.browserDir div {
+	background: rgb(200,200,200);
+}
+
+.browserDir a, .browserFile a  {
+	display: block;
+	padding: 5px;
+}
+
+#fileEditorWrap {
+	min-height: 20em;
+	clear: both;
+	display: block;
+	position: relative;
+}
+
+#fileEditorContent {
+	box-shadow: 0 0 10px -5px rgb(0,0,0);
+	background: rgb(255,255,255);
+	margin: 0;
+	width: 100%;
+	padding: 0 0 1em 0;
+}
+
+#fileEditorContent > span {
+	display: block;
+	background: rgb(60,60,180);
+	padding: 5px 10px;
+}
+
+.fileEditorTab {
+	display: inline-block;
+	position: relative;
+	padding: 3px 12px 3px 3px;
+	border-right: 2px solid rgb(40,40,40);
+	background: rgb(230,230,230);
+}
+
+.fileEditorTab > a {
+	position: absolute;
+	top: 0;
+	right: 1px;
+	font-size: 12px;
+}
+
+#aceEditor {
+	width: 95%;
+	height: 50em;
+	border: 1px solid rgb(0,0,0);
+	display: block;
+	margin: 10px auto;
+}
+
+#editorNav > span {
+	padding: 5px;
+	display: block;
+	background: rgb(60,60,180);
+}
+
+#editorNav > span h4 {
+	font-size: 1em;
+	margin: 0;
+	overflow-x: auto;
+	padding: 5px;
+}
+
+#editorNav > span a {
+	padding: 2px;
+	font-size: 1.3em;
+	background: rgb(0,0,0);
+	color:rgb(255,255,255);
+}
+
+#fileInfo {
+	background: rgb(230,230,230);
+	border-bottom: 1px solid rgb(0,0,0);
+	padding: 5px;
+}
+#fileInfo h2 {
+	font-size: 1.2em
+}
+
+#fileInfo h3 {
+	font-size: 1em;
+	width: 50%;
+	padding: 5px 0;
+	margin: 0;
+	display: inline-block;
+}
+
+#fileInfo button {
+	border-radius: 0;
+	font-size: 1.2em;
+	padding: 2px;
+	border: 1px solid rgb(0,0,0);
+}
+
+#editorSaveFile {background: rgb(255,255,255);}
+#editorDeleteFile {background: rgb(255,0,0);color: rgb(255,255,255);}

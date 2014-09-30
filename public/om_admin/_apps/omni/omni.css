@@ -1,0 +1,210 @@
+#omniBoxWrap {
+	padding-left:0;
+	padding-right:0;
+	background: rgb(230,230,230);
+}
+
+#omniNavigator {
+	width: 11em;
+	background: rgb(180,180,180);
+	display: inline-block;
+	margin: 0;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: absolute;
+	z-index: 10;
+}
+
+#omniNavigator h3 {
+	padding: 3px;
+	margin: 10px 0;
+}
+
+#omniNavigator a {
+	display: block;
+	margin: 0 0 5px 0;
+	padding: 3px;
+	
+}
+
+#omniFiles {
+	display: block;
+	position: relative;
+	padding: 0 0 0 0;
+}
+
+#omniWorkingDir {
+	display: block;
+	background: rgb(50,50,50);
+	position: relative;
+	border-bottom: 2px solid rgb(0,0,0);
+}
+
+#omniWorkingDir > a {
+	font-size: 1em;
+	padding: 5px 5px 5px 18px;
+	background: rgb(0,0,0);
+	background: -webkit-linear-gradient(left,  
+		rgb(0,0,0) 0%, rgb(50,50,50) 100%
+	);
+	color: rgb(255,255,255);
+	display: inline-block;
+	position: relative;
+}
+
+#omniWorkingDir > a:nth-of-type(1) {padding-left:5px;}
+
+#omniWorkingDir > a:after {
+	z-index: 10;
+	content: "";
+	position: absolute;
+	border-style: solid;
+	border-color: transparent transparent transparent  rgb(50,50,50);
+	border-width: 14px 14px 15px 14px;
+	right: -1.7em;
+	top:0;
+}
+
+#omniContextKeys {display: none;}
+
+#omniDir {
+	min-height: 30em;
+}
+
+.omniTable {
+	width: 100%;
+	position: relative;
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+.omniTable img {
+	width: 2em;
+	height: 2em;
+	display: inline-block;
+}
+
+.omniTable input {
+	font-size: 1.2em;
+}
+
+.omniTable th {
+	text-align: left;
+	padding: 5px;
+	background: rgb(50,50,50);
+	color: rgb(255,255,255);
+	border-right: 1px solid rgb(230,230,230);
+}
+
+.omniTable tr {
+	background: rgb(230,230,230);
+	clear: both;
+}
+
+.omniTable tr td {
+	padding:2px;
+}
+
+.omniTable tr td > a {
+	padding: 5px;
+	color: rgb(50,50,255);
+	position: relative;
+	top: -10px;
+}
+
+.omniTable tr td:first-child {
+	min-width: 15em;
+}
+
+.omniTable tr:nth-of-type(2n) {
+	background: rgb(200,200,200);
+}
+
+
+/****************************Open With Omni****************************/
+#omniOpenPrompt {
+	position: absolute;
+	display: block;
+	z-index: 20;
+	top: 20px;
+	width: 100%;
+}
+
+#omniOpenPrompt > div {
+	width: 50%;
+	position: relative;
+	max-width: 30em;
+	background: rgb(255,255,255);
+	padding: 10px;
+	border-radius: 10px;
+	border: 4px solid rgb(0,0,180);
+	box-shadow: 0 0 25px -5px rgb(0,0,0);
+	margin: 0 auto;
+}
+
+#omniOpenPrompt h3 {
+	font-size: 2em;
+	margin: 0 0 10px 0;
+	text-align: center;
+	color: rgb(100,100,100);
+	padding: 3px;
+}
+
+#omniOpenPrompt a{
+	display: block;
+	padding: 5px;
+	font-size: 1.5em;
+	clear:both;
+}
+
+#omniOpenPrompt a:nth-of-type(2n) {
+	background: rgb(230,230,230);
+}
+
+#omniOpenPrompt a:hover {background: rgb(230,230,255);}
+
+#omniOpenPrompt img {
+	display: inline;
+	width: 3em;
+	height: 3em;
+}
+
+.omniPromptClose {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	color: rgb(50,50,255) !important;
+}
+
+.omniInfoDiv {
+	padding-left: 0;
+	padding-right: 0;
+	background: rgb(230,230,255);
+	width: 90%;
+	max-width: 20em;
+	margin: 20px auto;
+	padding: 10px;
+	border: 1px solid rgb(0,0,0);
+}
+
+.omniInfoDiv h2 {
+	word-break: break-all;
+	font-size: 1.4em;
+	padding-left:0;
+}
+
+.omniInfoDiv img {
+	width: 128px;
+	display: block;
+	margin: 0 auto;
+}
+
+.omniInfoDiv a {
+	display: block;
+	text-align: center;
+	background: rgb(50,50,255);
+	color: rgb(255,255,255);
+	padding: 5px;
+	border: 1px solid rgb(0,0,0);
+}

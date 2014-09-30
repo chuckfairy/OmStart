@@ -2,35 +2,33 @@
 
 //Omstart Initialization and installation file//
 //Made with love Chuck//
+
 defined("DS") ? null : define("DS", DIRECTORY_SEPARATOR);
 
+//Get local root
+$path = explode("/", dirname(__FILE__));
+array_pop($path);
+$_src = implode("/", $path);
 
-
-//Local Root
-defined("LOCAL_ROOT") ? NULL : define("LOCAL_ROOT", "/Users/charlesabeling/Sites/omstart-v1/public/");
 //Url
+defined("SRC") ? NULL : define("SRC", $_src.DS);
+defined("LOCAL_ROOT") ? NULL : define("LOCAL_ROOT", SRC."public".DS);
 
+//Get http root
+$_source_location = "http://lolita.local".DS."~charlesabeling".DS."omstart".DS;
 
-chdir(LOCAL_ROOT.DS."../");
-$site_src = getcwd();
-defined("SITE_SRC") ? NULL : define("SITE_SRC", $site_src.DS);
+//SERVER SYSTEM PATH
+defined("SITE_ROOT") ? NULL: define("SITE_ROOT", $_source_location."public".DS);
 
+defined("LAYOUT") ? NULL : define("LAYOUT", LOCAL_ROOT."_layouts".DS);
+defined("L_ASSETS") ? NULL : define("L_ASSETS", LOCAL_ROOT."_assets".DS);
+defined("ASSETS") ? NULL : define("ASSETS", SITE_ROOT."_assets".DS);
+defined("ICONS") ? NULL : define("ICONS", SITE_ROOT."om_admin".DS."_assets".DS."icons".DS);
+defined("CONTROLLER") ? NULL : define("CONTROLLER", LOCAL_ROOT.DS."omstart".DS."controllers".DS);
+defined("TRASH") ? NULL : define("TRASH", SRC.DS."db".DS."trash".DS);
 
-//print_r($_SERVER);
-$_source_location = "http://lolita.local/~charlesabeling/omstart-v1";
-
-//FILE SYSTEM PATH
-defined("SITE_ROOT") ? NULL: define("SITE_ROOT", $_source_location.DS."public");
-//defined("SRC") ?   NULL: define("SRC", $_source_location.DS."private");
-//defined("LIB_PATH") ?  NULL: define("LIB_PATH", SRC.DS."omstart".DS);	
-
-defined("LAYOUT") ? NULL : define("LAYOUT", SITE_ROOT.DS."_layout".DS);
-defined("ASSETS") ? NULL : define("ASSETS", SITE_ROOT.DS."_assets".DS);
-defined("BLOG") ? NULL : define("BLOG", SITE_ROOT.DS."blog".DS);
-defined("OMADMIN")? NULL : define("OMADMIN", LOCAL_ROOT.DS."om_admin".DS);
 
 //OMSTART CORE
-
 require_once("core/config.php");
 require_once("core/databaseobject.php");
 require_once("core/functions.php");
@@ -39,37 +37,8 @@ require_once("core/logger.php");
 require_once("core/tableobject.php");
 require_once("core/user.php");
 require_once("core/cart.php");
-require_once("core/admin/admin.php");
-
-//require_once("comment.php");
+require_once("core/admin.php");
 
 //MAILER
 require_once("libs".DS."PHPMailer".DS."class.phpmailer.php");
 require_once("libs".DS."PHPMailer".DS."class.smtp.php");
-
-//PDF
-require_once("libs".DS."fpdf.php");
-require_once("libs".DS."fpdi".DS."fpdi.php");
-//require_once("libs".DS."watermark".DS."watermark.php");
-
-//ComposerExcel
-require_once("vendor/autoload.php");
-
-
-
-/*
-$smtp = new PHPMailer();
-$smtp->isSMTP();
-$smtp->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
-$smtp->SMTPAuth = true;  // authentication enabled
-$smtp->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-$smtp->Host = "smtp.gmail.com";
-$smtp->Port = 465;
-$smtp->Username = GUSER;
-$smtp->Password = GPASS;
-*/
-
-
-
-
-?>

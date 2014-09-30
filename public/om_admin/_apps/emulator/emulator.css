@@ -1,0 +1,56 @@
+#emulatorWrap {
+	padding-left: 0;
+	padding-right: 0;
+	background: rgb(100,100,100);
+}
+
+#emulatorActions {
+	float: right;
+	position: relative;
+	border-left: 1px solid rgb(180,180,180);
+	padding: 5px;
+	width: 15em;
+	display: block;
+	height: 100%;
+}
+
+#emulatorActions h2 {
+	border: none;
+}
+
+#emulatorBrowser input {
+	background: transparent;
+	border: none;
+	border-bottom: 2px solid rgb(50,50,255);
+	color: rgb(255,255,255);
+	padding: 5px;
+} 
+
+#emulatorBrowser input:focus {
+	box-shadow: none;
+}
+
+#emulatorBrowser a {
+	padding: 2px 4px;
+	background: rgb(255,255,255);
+	border: 1px solid rgb(0,0,0);
+}
+
+#emulatorArea {
+	padding: 20px;
+	margin: 0 auto;
+	min-height: 100%;
+	overflow-x: auto;
+}
+
+#emulator {
+	-webkit-transition: all 1s ease-out;
+	box-shadow: 0 0 25px -5px rgb(0,0,0);
+}
+
+.screen {
+	background: rgb(255,255,255);
+	z-index: 100;
+	position: absolute;
+	overflow: auto;
+}

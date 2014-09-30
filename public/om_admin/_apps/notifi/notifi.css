@@ -1,0 +1,35 @@
+#Notifi {
+	width: 14em;
+	padding: 2.5em 5px 5px 5px;
+	background: rgb(0,0,0);
+	background: rgba(0,0,0,.5);
+	border: 1px solid rgb(0,0,0);
+	box-shadow: 0 0 15px -5px rgb(0,0,0);
+	min-height: 4em;
+	right: 15px;
+	top: 15px;
+	position: absolute;
+	z-index: 500;
+	-webkit-transition: all .75s ease-out;
+	-moz-transition: all .75s ease-out;
+	-ms-transition: all .75s ease-out;
+}
+
+#Notifi > a {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 1.2em;
+	font-weight: 900;
+	padding: 3px;
+	background: rgb(0,0,0);
+	color: rgb(255,255,255);
+	content: "X";
+	cursor: pointer;
+}
+
+#Notifi > div {
+	background: rgb(50,50,50);
+	color: rgb(255,255,255);
+	border-radius: 5px;
+}

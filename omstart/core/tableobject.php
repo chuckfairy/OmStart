@@ -8,7 +8,10 @@ class TableObject extends DatabaseObject {
 	protected static $filter = array();
 	public static    $offset;
 	public static    $limit=30;
+	public static    $select=" * ";
 	public static    $order;
+	public static    $join = null;
+	public static    $join_by = null;
 	public $id;
 	public $page;
 	public $total_count;
@@ -66,37 +69,22 @@ class TableObject extends DatabaseObject {
 	
 	public function save($attributes=null) {
 		global $session;
-		global $admin;
-		//$admin->check_login();
-		
-		//!is_null($attributes)? $this->set_attributes($attributes): null;
-		$this->validate();
-		$this->sanitize();
-		if(!empty($session->errors)) {return false;}
-		
 		
 		$attributes = $this->get_attributes();
 		if(isset($this->id)) {
-			//Id is already set let us update!
-			if(self::update($attributes)) {
-				$session->set_message("Update Successful.");
-				return true;
-			} else {
-				$session->set_message("Update failure.");
-				return false;
-			}	
+			if(!empty(static::find_by("id", $this->id)[0])) {
+				//Id is already set let us update!
+				static::update($attributes);
+			}
 		}
 		
-		else {
-			//Id not set, let us create!
-			if(self::create($attributes)) {return true;} 
-			else {return false;}
-		}
+		//Id not set, or id not found let us create!
+		if(self::create($attributes)) {return true;} 
+		else {return false;}
 	}
 	
 	public function delete_by_id($id) {
 		global $session;
-		$id = self::escape($id);
 		if($this->find_by("id", $id)) {
 			if(static::delete($id)) {
 				$session->set_message("Page id:{$id} has been deleted.");
@@ -196,88 +184,6 @@ class TableObject extends DatabaseObject {
 	}
 /*****************************UPLOADING*****************************/
 	
-	public function file_upload($table, $tmp_file, $path, $file_name) {
-
-		//Change the instrumentation too the dir name. 
-		if(isset($this->instrumentation)) {
-			$instrumentation = i_dir($this->instrumentation);
-		} else {
-			$session->set_message("instrumentation not set.");
-			return false;
-		}
-		$file_name = clean_file($file_name); //Remove unwanted characters
-		$path = g_dir($path);
-		global $session;
-		
-		
-		//Picture Upload
-		if($table == "picture_path"  && is_picture($file_name)) {
-			//basename makes sure it just gets the basename without extension
-			$upload_dir = ASSETS."pictures".DS.$path;
-			echo $tmp_file."->".$upload_dir.DS.$file_name."<br/>";
-			
-			//move_uploaded_file will return false if $tmp_file is not valid
-			if(move_uploaded_file($tmp_file, $upload_dir.DS.$file_name)) {
-				$this->picture_path = $path.DS.$file_name;
-				$session->set_message("Picture file uploaded successfully.");
-				return true;
-			} else {
-				$error = $_FILES["picture_upload"]["error"];
-				$session->set_message($this->upload_errors[$error]);
-				return false;
-			}
-		}
-			
-		//First Page Upload	
-		if($table == "first_page") {
-			$upload_dir = ASSETS."first_page".DS.$instrumentation.DS.$path;
-			echo $tmp_file."->".$upload_dir.DS.$file_name."<br/>";
-			
-			if(move_uploaded_file($tmp_file, $upload_dir.DS.$file_name)) {
-				$this->first_page = $instrumentation.DS.$path.DS.$file_name;
-				$session->set_message("Page file uploaded successfully.");
-				return true;
-			} else {
-				$error = $_FILES["page_upload"]["error"];
-				$session->set_message($this->upload_errors[$error]);
-				return false;
-			}
-		}
-		
-		//Zip Upload
-		if($table == "zip") {
-			$upload_dir = SRC.DS."zips".DS.$instrumentation.DS.$path;
-			echo $tmp_file."->".$upload_dir.DS.$file_name."<br/>";
-			
-			if(move_uploaded_file($tmp_file, $upload_dir.DS.$file_name)) {
-				$this->zip = $instrumentation.DS.$path.DS.$file_name;
-				$session->set_message("Zip file uploaded successfully.");
-				return true;
-			} else {
-				$error = $_FILES["zip_upload"]["error"];
-				$session->set_message($this->upload_errors[$error]);
-				return false;
-			}
-		}
-		
-		//Mp3 Upload
-		if($table == "mp3") {
-			$upload_dir = SITE_ROOT.DS."_mp3".DS.$instrumentation.DS.$path;
-			echo $tmp_file."->".$upload_dir.DS.$file_name."<br/>";
-			
-			if(move_uploaded_file($tmp_file, $upload_dir.DS.$file_name)) {
-				$this->mp3 = $instrumentation.DS.$path.DS.$file_name;
-				$session->set_message("Mp3 file uploaded successfully.");
-				return true;
-			} else {
-				$error = $_FILES["mp3_upload"]["error"];
-				$session->set_message($this->upload_errors[$error]);
-				return false;
-			}
-		}						
-	}
-		
-/*************************************************************DATA FOR LMP******************************************************/
 
 		
 }	

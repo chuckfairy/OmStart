@@ -1,0 +1,9 @@
+#createAdminForm {
+	display: block;
+	width: 60%;
+	min-width: 18em;
+	padding: 10px;
+	background: rgb(180,180,180);
+	margin: 0 auto;
+	border-radius: 20px;
+}

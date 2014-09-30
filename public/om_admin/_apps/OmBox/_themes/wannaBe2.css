@@ -1,0 +1,124 @@
+/*Wanna be theme by chuck fairy*/
+.wannaBe2 {
+	height: 80%;
+	font-size: 16px;
+	padding: 2.2em 0 0 0;
+	margin: 0 auto;
+	background:rgb(255,255,255);
+	max-height: 100%;
+	width: 80%;
+	box-shadow: 0 0 40px -5px rgb(0,0,0);
+	border-radius: 5px;
+	z-index: 20;
+	position: absolute;
+	left: 0;
+	right: 0;
+	
+	-webkit-transition: transform .6s ease-out, opacity .4s ease-in;
+	-moz-transition: transform .6s ease-out, opacity .4s ease-in;
+	-ms-transition: transform .6s ease-out, opacity .4s ease-in;
+	overflow: hidden;
+}
+
+.wannaBe2 a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.wannaBe2Top {
+	background: rgb(235,235,235);
+	height: 2.2em;
+	background-size: cover;
+	position: absolute;
+	z-index: 50;
+	border-radius: 4px 4px 0 0;
+	left:0;
+	right:0;
+	top: 0;
+	display: block;
+	color: rgb(255,255,255);
+	border-bottom: 1px solid rgb(120,120,120);
+}
+
+
+.wannaBe2Top h3 {
+	font-size: 1.3em;
+	text-align: center;
+	width: 100%;
+	padding: 5px 0 15px 5px;
+	color: rgb(0,0,0);
+	margin: 0;
+}
+
+.wannaBe2Top span {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	z-index: 10;
+	z-index: 5;
+	padding: 5px;
+}
+
+.wannaBe2Top span a {
+	float:left;
+	font-size: 1em;
+	content: " ";
+	border-radius: 50%;
+	margin-right: 2px;
+	padding: 8px;
+	color: rgb(255,255,255);
+	-webkit-transition: all .5s ease-out;
+	-moz-transition: all .5s ease-out;
+	-ms-transition: all .5s ease-out;
+	z-index: 5;
+	display: block;
+}
+
+.wannaBe2Top span a h3 {z-index: -1;}
+
+.wannaBe2X {
+	border: 2px solid rgb(200,0,0);
+}
+
+.wannaBe2X:hover {background: rgb(200,0,0);}
+
+.wannaBe2Out {
+	border: 2px solid rgb(255,200,0);
+}
+
+.wannaBe2Out:hover {background: rgb(255,200,0);}
+
+.wannaBe2Full {
+	border: 2px solid rgb(0,200,0);
+}
+
+.wannaBe2Full:hover {background: rgb(0,200,0);}
+
+.wannaBe2Footer {
+	height: 1em;
+	width: 100%;
+	background: rgb(235,235,235);
+	position: absolute;
+	bottom: 0;
+	z-index: 10;
+	border-radius: 0 0 5px 5px;
+	border-top: 1px solid rgb(120,120,120);
+}
+
+.wannaBe2Handle {
+	float: right;
+	content: "";
+	position: relative;
+	border-style: solid;
+	border-color: rgb(0,0,0) rgb(0,0,0)  transparent transparent;
+	border-width: 1em;
+	right: 10px;
+}
+
+.wannaBe2Content {
+	padding: 0 0 1em 0;
+	height: 94%;
+	overflow-y: scroll;
+	position: relative;
+	background: rgb(255,255,255);
+}
