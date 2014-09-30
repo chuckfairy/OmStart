@@ -1,9 +1,0 @@
-<style>#someTag {some: css;}</style>
-<h2>The Header</h2>
-<div id='contentDiv'>
-  <p>The Main action</p>
-</div>
-
-<script>
-//Sample Comment
-</script>
