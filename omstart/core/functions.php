@@ -93,6 +93,15 @@ function clean_file($file_name) {
 	return $safe_file_name;
 }
 
+function clean_query($file_name) {
+	$unacceptable = array(
+		"+","/","%","#", '"',
+		":","?","@","&", "'"
+	);
+	$safe_file_name = str_replace($unacceptable, "_", $file_name);
+	return $safe_file_name;
+}
+
 function get_lines($url) {
 	$fh = fopen($url, "r");
 	if($fh) {

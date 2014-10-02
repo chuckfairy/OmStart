@@ -14,19 +14,11 @@ $_src = implode("/", $path);
 defined("SRC") ? NULL : define("SRC", $_src.DS);
 defined("LOCAL_ROOT") ? NULL : define("LOCAL_ROOT", SRC."public".DS);
 
-//Get http root
-$_source_location = "http://lolita.local".DS."~charlesabeling".DS."omstart".DS;
-
 //SERVER SYSTEM PATH
-defined("SITE_ROOT") ? NULL: define("SITE_ROOT", $_source_location."public".DS);
-
 defined("LAYOUT") ? NULL : define("LAYOUT", LOCAL_ROOT."_layouts".DS);
 defined("L_ASSETS") ? NULL : define("L_ASSETS", LOCAL_ROOT."_assets".DS);
-defined("ASSETS") ? NULL : define("ASSETS", SITE_ROOT."_assets".DS);
-defined("ICONS") ? NULL : define("ICONS", SITE_ROOT."om_admin".DS."_assets".DS."icons".DS);
 defined("CONTROLLER") ? NULL : define("CONTROLLER", LOCAL_ROOT.DS."omstart".DS."controllers".DS);
 defined("TRASH") ? NULL : define("TRASH", SRC.DS."db".DS."trash".DS);
-
 
 //OMSTART CORE
 require_once("core/config.php");

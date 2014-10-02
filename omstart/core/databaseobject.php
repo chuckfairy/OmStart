@@ -22,7 +22,7 @@ class DatabaseObject {
 		$this->user = $user;
 		$this->password = $pass;
 		try {
-			self::$PDO = new PDO("mysql:host=".$server.";dbname=".$db_name, $user, $pass, 
+			self::$PDO = new PDO(DB_TYPE.":host=".$server.";dbname=".$db_name, $user, $pass, 
 				array(PDO::ATTR_PERSISTENT => true)
 			);
 			self::$PDO->exec("set names utf8");
@@ -37,6 +37,11 @@ class DatabaseObject {
 	
 	public function close_connection() {
 		if(isset(self::$PDO)) {self::$PDO = null;}
+	}
+	
+	public function reload() {
+		$this->get_tables();
+		$this->extract_tables();
 	}
 	
 	public static function confirm_query($result_set) {
@@ -125,8 +130,6 @@ class DatabaseObject {
 		foreach($attributes as $field => $value) {
 			$execute[":{$field}"] = $value;
 		}
-		echo $sql;
-		print_r($execute);
 		return $results = self::query($sql, $execute);
 	}
 	
@@ -256,6 +259,53 @@ class DatabaseObject {
 		}
 		return false;
 	}
+
+/*************************************************************Database Creation******************************************************/	
+	protected static function create_table($table_name="", $table_data) {
+		global $session;
+		if(self::validate_table($table_name)) {
+			$session->set_message("Cannot create table is already table.");
+			return false;	
+		}
+		
+		$create_query = "CREATE TABLE ".clean_file($table_name)." (";
+		$i = 0;
+		foreach($table_data as $field_name => $field_data) {
+			if(!self::accetable_dtype($field_data["type"])) {
+				$session->set_message($field_data." not acceptable type");
+				return false;
+			}
+			//Check if text
+			if($field_data["type"] === "TEXT") {
+				$data_type = "TEXT ";
+			} else {
+				$data_type = $field_data["type"]."(".((int) $field_data["max"]).") ";	
+			}
+			
+			if($i !== 0) {$create_query.=", ";}
+			
+			$create_query.= clean_file($field_name)." ";
+			$create_query.= $data_type;
+			$create_query.= clean_query($field_data["extra"]);
+			$i++;
+		}
+		$create_query.= ")";
+		return self::query($create_query);
+	}
+	
+	protected static function drop_table($table_name) {
+		if(self::validate_table($table_name)) {
+			self::query("DROP TABLE ".$table_name);
+		}
+	}
+
+	public static function accetable_dtype($dtype="") {
+		$a_dtypes = ["INT", "VARCHAR", "TEXT", "TINYINT", "BLOB"];
+		if(in_array($dtype, $a_dtypes)) {return true;}
+		else {return false;}
+	}
+
+
 	
 /*************************************************************QUERY SPECIFIERS******************************************************/	
 	

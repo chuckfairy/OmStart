@@ -1,4 +1,14 @@
-<?php require_once("../../omstart/initialize.php");?>
+<?php require_once("../../omstart/initialize.php");
+
+//Check if setup
+if(!$database->validate_table("om_admin")) {
+	include_once("_apps/setup/init.php");
+	exit;
+} elseif(!isset($Admin->find_all()[0])) {
+	include_once("_apps/setup/init.php");
+	exit;
+}
+?>
 
 <!DOCTYPE html> 
 <html>
