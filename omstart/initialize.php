@@ -30,7 +30,3 @@ require_once("core/tableobject.php");
 require_once("core/user.php");
 require_once("core/cart.php");
 require_once("core/admin.php");
-
-//MAILER
-require_once("libs".DS."PHPMailer".DS."class.phpmailer.php");
-require_once("libs".DS."PHPMailer".DS."class.smtp.php");
